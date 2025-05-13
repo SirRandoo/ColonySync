@@ -4,7 +4,7 @@
 CREATE TABLE UserSessions
 (
     /*
-        An auto-generated unique id that identifies the session + user pair.
+        An auto-generated unique id that identifies the session and user pair.
      */
     user_sessions_id SERIAL PRIMARY KEY,
 

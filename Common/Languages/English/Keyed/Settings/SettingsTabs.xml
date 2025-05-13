@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LanguageData>
-    <StreamKit.Settings.Tabs.Client>Client</StreamKit.Settings.Tabs.Client>
-    <StreamKit.Settings.Tabs.Tooltips.Client>A collection of settings that affects how the mod displays information to you.</StreamKit.Settings.Tabs.Tooltips.Client>
+    <ColonySync.Settings.Tabs.Client>Client</ColonySync.Settings.Tabs.Client>
+    <ColonySync.Settings.Tabs.Tooltips.Client>A collection of settings that affects how the mod displays information to you.</ColonySync.Settings.Tabs.Tooltips.Client>
 
-    <StreamKit.Settings.Tabs.Commands>Commands</StreamKit.Settings.Tabs.Commands>
-    <StreamKit.Settings.Tabs.Tooltips.Commands>A collection of settings that affects how the mod's command system functions.</StreamKit.Settings.Tabs.Tooltips.Commands>
+    <ColonySync.Settings.Tabs.Commands>Commands</ColonySync.Settings.Tabs.Commands>
+    <ColonySync.Settings.Tabs.Tooltips.Commands>A collection of settings that affects how the mod’s command system functions.</ColonySync.Settings.Tabs.Tooltips.Commands>
 
-    <StreamKit.Settings.Tabs.Morality>Morality</StreamKit.Settings.Tabs.Morality>
-    <StreamKit.Settings.Tabs.Tooltips.Morality>A collection of settings that affects how the mod's morality system functions.</StreamKit.Settings.Tabs.Tooltips.Morality>
+    <ColonySync.Settings.Tabs.Morality>Morality</ColonySync.Settings.Tabs.Morality>
+    <ColonySync.Settings.Tabs.Tooltips.Morality>A collection of settings that affects how the mod’s morality system functions.</ColonySync.Settings.Tabs.Tooltips.Morality>
 
-    <StreamKit.Settings.Tabs.Pawns>Pawns</StreamKit.Settings.Tabs.Pawns>
-    <StreamKit.Settings.Tabs.Tooltips.Pawns>A collection of settings that affects how the mod's pawn system functions.</StreamKit.Settings.Tabs.Tooltips.Pawns>
+    <ColonySync.Settings.Tabs.Pawns>Pawns</ColonySync.Settings.Tabs.Pawns>
+    <ColonySync.Settings.Tabs.Tooltips.Pawns>A collection of settings that affects how the mod’s pawn system functions.</ColonySync.Settings.Tabs.Tooltips.Pawns>
 
-    <StreamKit.Settings.Tabs.Points>Points</StreamKit.Settings.Tabs.Points>
-    <StreamKit.Settings.Tabs.Tooltips.Points>A collection of settings that affects how the mod's point system functions.</StreamKit.Settings.Tabs.Tooltips.Points>
+    <ColonySync.Settings.Tabs.Points>Points</ColonySync.Settings.Tabs.Points>
+    <ColonySync.Settings.Tabs.Tooltips.Points>A collection of settings that affects how the mod’s point system functions.</ColonySync.Settings.Tabs.Tooltips.Points>
 
-    <StreamKit.Settings.Tabs.Poll>Poll</StreamKit.Settings.Tabs.Poll>
-    <StreamKit.Settings.Tabs.Tooltips.Poll>A collection of settings that affect how the mod's polling system functions.</StreamKit.Settings.Tabs.Tooltips.Poll>
+    <ColonySync.Settings.Tabs.Poll>Poll</ColonySync.Settings.Tabs.Poll>
+    <ColonySync.Settings.Tabs.Tooltips.Poll>A collection of settings that affect how the mod’s polling system functions.</ColonySync.Settings.Tabs.Tooltips.Poll>
 
-    <StreamKit.Settings.Tabs.Store>Store</StreamKit.Settings.Tabs.Store>
-    <StreamKit.Settings.Tabs.Tooltips.Store>A collection of settings that affects how the mod's store functions.</StreamKit.Settings.Tabs.Tooltips.Store>
+    <ColonySync.Settings.Tabs.Store>Store</ColonySync.Settings.Tabs.Store>
+    <ColonySync.Settings.Tabs.Tooltips.Store>A collection of settings that affects how the mod’s store functions.</ColonySync.Settings.Tabs.Tooltips.Store>
 
-    <StreamKit.Settings.Tabs.Debug>Debug</StreamKit.Settings.Tabs.Debug>
-    <StreamKit.Settings.Tabs.Tooltips.Debug>A collectino of interesting content for debugging the mod.</StreamKit.Settings.Tabs.Tooltips.Debug>
+    <ColonySync.Settings.Tabs.Debug>Debug</ColonySync.Settings.Tabs.Debug>
+    <ColonySync.Settings.Tabs.Tooltips.Debug>A collectino of interesting content for debugging the mod.</ColonySync.Settings.Tabs.Tooltips.Debug>
 </LanguageData>

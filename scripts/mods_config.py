@@ -13,17 +13,14 @@ __all__ = ["ModsConfig", "load_mods_config", "save_mods_config"]
 
 @dataclass(slots=True)
 class ModsConfig:
-    """Represents the game's "ModsConfig.xml" file.
+    """
+    A data class used to configure mod settings for a given application. Uses the
+    `__slots__` attribute to reduce memory usage and improve attribute access speed.
 
     Attributes:
-        version:
-            The current version of the game the mods config file was last saved
-            with.
-        active_mods:
-            The list of mods that'll be loaded when the game starts.
-        known_expansions:
-            The list of "mods" that the game will instead recognize as an
-            expansion.
+        version: A string representing the current version of the configuration.
+        active_mods: A list of strings representing the active mods in use. Defaults to an empty list.
+        known_expansions: A list of strings representing known expansions. Defaults to an empty list.
     """
 
     version: str
@@ -32,15 +29,16 @@ class ModsConfig:
 
 
 def load_mods_config(file_path: Path) -> ModsConfig:
-    """Loads the ModsConfig.xml file into memory.
-
+    """
     Args:
-        file_path:
-            The path to the ModsConfig.xml file in the game's save data folder.
+        file_path: Path to the XML configuration file.
+
+    Returns:
+        ModsConfig: An instance of ModsConfig containing the game version, active mods, and known expansions.
+
     Raises:
-        ValueError:
-            The `version` element could not be found, or the value of it was
-            `None` or empty.
+        ValueError: If the game version is not found in the XML configuration file.
+
     """
     with file_path.open("r", encoding="utf-8") as f:
         tree = ET.ElementTree(file=f)
@@ -68,14 +66,13 @@ def load_mods_config(file_path: Path) -> ModsConfig:
     )
 
 
-def save_mods_config(file_path: Path, mods_config: ModsConfig):
-    """Saves the mods config to disk.
+def save_mods_config(file_path: Path, mods_config: ModsConfig, dry_run: bool = False):
+    """
+    Saves the given ModsConfig object to the specified file path in XML format.
 
     Args:
-        file_path:
-            The path to the ModsConfig.xml file in the game's save data folder.
-        mods_config:
-            The modified mods config instance that's being saved to disk.
+        file_path: The file path where the ModsConfig XML representation will be saved.
+        mods_config: The ModsConfig object containing the configuration data to be saved.
     """
     root_element: ET.Element = ET.Element("ModsConfigData")
     version_element: ET.Element = ET.SubElement(root_element, "version")
@@ -93,6 +90,9 @@ def save_mods_config(file_path: Path, mods_config: ModsConfig):
     for known_expansion in mods_config.known_expansions:
         li_element: ET.Element = ET.SubElement(known_expansions_element, "li")
         li_element.text = known_expansion
+
+    if dry_run:
+        return
 
     with file_path.open("wb") as f:
         tree = ET.ElementTree(root_element)

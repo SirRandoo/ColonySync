@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <!-- Runtime Properties -->
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+    </PropertyGroup>
+    
+    <!-- NuGet Properties -->
+    <PropertyGroup>
+        <Description>Houses the Ideology compatibility for "ColonySync," a mod for the game "RimWorld."</Description>
+    </PropertyGroup>
+    
+    <!-- Project References -->
+    <ItemGroup>
+        <ProjectReference Include="..\ColonySync.Mod.Api\ColonySync.Mod.Api.csproj"/>
+    </ItemGroup>
+</Project>

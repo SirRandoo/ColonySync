@@ -4,32 +4,38 @@
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
         <LangVersion>preview</LangVersion>
-        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
-
+    
     <!-- Licensing -->
-    <PropertyGroup>
+    <PropertyGroup Condition="$(UsingMicrosoftNoTargetsSdk) != 'true'">
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageLicenseUrl>https://licenses.nuget.org/MIT</PackageLicenseUrl>
     </PropertyGroup>
-
+    
     <!-- Product Information -->
-    <PropertyGroup>
-        <Product>StreamKit</Product>
+    <PropertyGroup Condition="$(UsingMicrosoftNoTargetsSdk) != 'true'">
+        <Product>ColonySync</Product>
         <Authors>SirRandoo</Authors>
         <Copyright>Copyright (c) $([System.DateTime]::Now.ToString("yyyy")) SirRandoo</Copyright>
-        <Description>A component of "StreamKit", a services for the game "RimWorld" that provides allows viewers to affect the game with digital currency they accumulate passively.</Description>
-
+        <Description>A component of "$(Product)", a mod for the game "RimWorld" that provides allows viewers to affect the game with digital currency they accumulate passively.</Description>
+        
         <!-- Urls -->
-        <RepositoryUrl>https://github.com/sirrandoo/StreamKit</RepositoryUrl>
-        <PackageProjectUrl>https://docs.sirrandoo.com/streamkit</PackageProjectUrl>
-
+        <RepositoryUrl>https://github.com/sirrandoo/$(Product)</RepositoryUrl>
+        <PackageProjectUrl>https://docs.sirrandoo.com/$(Product)</PackageProjectUrl>
+        
         <!-- Misc -->
         <RepositoryType>git</RepositoryType>
     </PropertyGroup>
-
+    
     <!-- Package Information -->
-    <PropertyGroup>
+    <PropertyGroup Condition="$(UsingMicrosoftNoTargetsSdk) != 'true'">
         <Version>0.1.0</Version>
+    </PropertyGroup>
+    
+    <!-- Build metadata properties -->
+    <PropertyGroup Condition="$(UsingMicrosoftNoTargetsSdk) != 'true'">
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     </PropertyGroup>
 </Project>

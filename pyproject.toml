@@ -1,20 +1,7 @@
-[tool.poetry]
-name = "rw-streamkit"
+[project]
+name = "ColonySync"
 version = "0.1.0"
-description = ""
-authors = ["rando <8146689+SirRandoo@users.noreply.github.com>"]
+description = "An mod for the game 'RimWorld' that provides stream integration."
 readme = "README.md"
-package-mode = false
-
-[tool.poetry.dependencies]
-python = "^3.12"
-click = "^8.1.7"
-vdf = "^3.4"
-
-
-[tool.poetry.group.dev.dependencies]
-black = "^24.3.0"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires-python = ">=3.13"
+dependencies = []

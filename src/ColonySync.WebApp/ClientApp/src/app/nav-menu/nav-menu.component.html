@@ -1,0 +1,15 @@
+<header>
+  <nav class="immersive-content stealth-link">
+    <a [routerLink]="['/']" class="immersive-header">StreamKit</a>
+    <ul class="immersive-nav-items">
+      <li>
+        <a [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/']"
+           class="immersive-state-button"
+           routerLinkActive="active">Home</a>
+      </li>
+      <li>
+        <a [routerLink]="['/settings']" class="immersive-state-button" routerLinkActive="active">Settings</a>
+      </li>
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <!-- Runtime Properties -->
+    <PropertyGroup>
+        <TargetFrameworks>net48;net9.0</TargetFrameworks>
+    </PropertyGroup>
+    
+    <!-- Package References -->
+    <ItemGroup>
+        <PackageReference Include="FlatSharp.Compiler">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="FlatSharp.Runtime" PrivateAssets="all"/>
+    </ItemGroup>
+</Project>

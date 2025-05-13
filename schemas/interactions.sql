@@ -1,5 +1,5 @@
 /*
-    Represents an in-game action that was taken a viewer through the extension.
+    Represents an in-game action taken a viewer through the extension.
  */
 CREATE TABLE Interactions
 (
@@ -20,7 +20,7 @@ CREATE TABLE Interactions
 
     /*
         The name of the interaction that took place. Interaction names are
-        taken from the context menu of items within the game, and as a result
+        taken from the context menu of items within the game, and as a result,
         aren't known until an interaction takes place.
      */
     interaction_name  TEXT

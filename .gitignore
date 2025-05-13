@@ -745,3 +745,4 @@ Common/[Ll]ibraries/
 Common/[Nn]atives/
 .run/Launch RimWorld.run.xml
 .run/.steam
+.python-version

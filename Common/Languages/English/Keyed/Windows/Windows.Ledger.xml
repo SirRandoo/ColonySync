@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LanguageData>
-    <StreamKit.Windows.Ledger.Text.LastSeen>Last seen: {0}</StreamKit.Windows.Ledger.Text.LastSeen>
-    <StreamKit.Windows.Ledger.Text.LastSeenDays>{0} days ago.</StreamKit.Windows.Ledger.Text.LastSeenDays>
-    <StreamKit.Windows.Ledger.Text.LastSeenHours>{0} hours ago.</StreamKit.Windows.Ledger.Text.LastSeenHours>
-    <StreamKit.Windows.Ledger.Text.LastSeenMinutes>{0} minutes ago.</StreamKit.Windows.Ledger.Text.LastSeenMinutes>
-    <StreamKit.Windows.Ledger.Text.LastSeenSeconds>{0} seconds ago.</StreamKit.Windows.Ledger.Text.LastSeenSeconds>
-    <StreamKit.Windows.Ledger.Headers.CurrentLedger>Current ledger:</StreamKit.Windows.Ledger.Headers.CurrentLedger>
-    <StreamKit.Windows.Ledger.Buttons.ViewTransactions>View transactions</StreamKit.Windows.Ledger.Buttons.ViewTransactions>
-    <StreamKit.Windows.Ledger.Tooltips.DeleteViewer>Deletes the viewer's information from the ledger.</StreamKit.Windows.Ledger.Tooltips.DeleteViewer>
-    <StreamKit.Windows.Ledger.Tooltips.AddViewerKarma>Click to add karma to the viewer's current karma.</StreamKit.Windows.Ledger.Tooltips.AddViewerKarma>
-    <StreamKit.Windows.Ledger.Tooltips.AddViewerPoints>Click to add points to the viewer's current balance.</StreamKit.Windows.Ledger.Tooltips.AddViewerPoints>
-    <StreamKit.Windows.Ledger.Tooltips.RemoveViewerKarma>Click to remove karma from the viewer's current karma.</StreamKit.Windows.Ledger.Tooltips.RemoveViewerKarma>
-    <StreamKit.Windows.Ledger.Tooltips.RemoveViewerPoints>Click to remove points from the viewer's current balance.</StreamKit.Windows.Ledger.Tooltips.RemoveViewerPoints>
+    <ColonySync.Windows.Ledger.Text.LastSeen>Last seen: {0}</ColonySync.Windows.Ledger.Text.LastSeen>
+    <ColonySync.Windows.Ledger.Text.LastSeenDays>{0} days ago.</ColonySync.Windows.Ledger.Text.LastSeenDays>
+    <ColonySync.Windows.Ledger.Text.LastSeenHours>{0} hours ago.</ColonySync.Windows.Ledger.Text.LastSeenHours>
+    <ColonySync.Windows.Ledger.Text.LastSeenMinutes>{0} minutes ago.</ColonySync.Windows.Ledger.Text.LastSeenMinutes>
+    <ColonySync.Windows.Ledger.Text.LastSeenSeconds>{0} seconds ago.</ColonySync.Windows.Ledger.Text.LastSeenSeconds>
+    <ColonySync.Windows.Ledger.Headers.CurrentLedger>Current ledger:</ColonySync.Windows.Ledger.Headers.CurrentLedger>
+    <ColonySync.Windows.Ledger.Buttons.ViewTransactions>View transactions</ColonySync.Windows.Ledger.Buttons.ViewTransactions>
+    <ColonySync.Windows.Ledger.Tooltips.DeleteViewer>Deletes the viewer’s information from the ledger.</ColonySync.Windows.Ledger.Tooltips.DeleteViewer>
+    <ColonySync.Windows.Ledger.Tooltips.AddViewerKarma>Click to add karma to the viewer’s current karma.</ColonySync.Windows.Ledger.Tooltips.AddViewerKarma>
+    <ColonySync.Windows.Ledger.Tooltips.AddViewerPoints>Click to add points to the viewer’s current balance.</ColonySync.Windows.Ledger.Tooltips.AddViewerPoints>
+    <ColonySync.Windows.Ledger.Tooltips.RemoveViewerKarma>Click to remove karma from the viewer’s current karma.</ColonySync.Windows.Ledger.Tooltips.RemoveViewerKarma>
+    <ColonySync.Windows.Ledger.Tooltips.RemoveViewerPoints>Click to remove points from the viewer’s current balance.</ColonySync.Windows.Ledger.Tooltips.RemoveViewerPoints>
 </LanguageData>

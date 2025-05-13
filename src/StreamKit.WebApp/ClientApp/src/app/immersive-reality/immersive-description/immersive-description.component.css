@@ -1,7 +1,0 @@
-.immersive-description {
-  color: var(--immersive-description-color);
-  text-indent: 8px each-line;
-  margin: 0 var(--standard-window-padding) 0 var(--standard-window-padding);
-  padding: 0;
-  width : 100%;
-}

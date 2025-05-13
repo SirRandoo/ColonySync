@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <!-- Runtime Properties -->
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+    </PropertyGroup>
+    
+    <!-- NuGet Properties -->
+    <PropertyGroup>
+        <Description>The api for $(Product), an interactivity mod for Unity games.</Description>
+    </PropertyGroup>
+    
+    <!-- Package References -->
+    <ItemGroup>
+        <PackageReference Include="System.Net.Http"/>
+        <PackageReference Include="System.Text.Json"/>
+        <PackageReference Include="PolySharp" ExcludeAssets="runtime"/>
+        <PackageReference Include="Lib.Harmony" ExcludeAssets="runtime"/>
+        <PackageReference Include="NetEscapades.EnumGenerators" ExcludeAssets="runtime"/>
+        
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Bogus"/>
+    </ItemGroup>
+    
+    <!-- Project References -->
+    <ItemGroup>
+        <ProjectReference Include="..\ColonySync.Common\ColonySync.Common.csproj"/>
+        <ProjectReference Include="..\ColonySync.Mod.Shared\ColonySync.Mod.Shared.csproj" ExcludeAssets="runtime"/>
+    </ItemGroup>
+</Project>

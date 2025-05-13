@@ -1,6 +1,6 @@
-# StreamKit
+# ColonySync
 
-StreamKit is a Twitch-integrated mod for RimWorld that enhances gameplay by
+ColonySync is a Twitch-integrated mod for RimWorld that enhances gameplay by
 connecting Twitch events with in-game actions. The mod offers a plugin-friendly
 architecture, and optional web server, and efficient two-way communication
 between the game and external services.
@@ -18,26 +18,27 @@ between the game and external services.
 
 ## Steam Workshop
 
-You can install the mod from the [Steam Workshop](https://docs.sirrandoo.com/streamkit):
-    1. Subscribe to the mod on the Steam Workshop page.
-    2. Launch RimWorld and enable the mod through the mod manager.
+You can install the mod from the [Steam Workshop](https://docs.sirrandoo.com/ColonySync):
+
+1. Subscribe to the mod on the Steam Workshop page.
+2. Launch RimWorld and enable the mod through the mod manager.
 
 ## Manual Installation
 
-1. Download the latest release from the [GitHub Releases](https://github.com/sirrandoo/streamkit/releases).
+1. Download the latest release from the [GitHub Releases](https://github.com/sirrandoo/ColonySync/releases).
 2. Extract the contents to your RimWorld `Mods` directory: <br/>
    `C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods`
 3. Enable the mod from the mod manager in-game
 
 # Usage
 
-1. Navigate to the mod's settings menu in RimWorld.
+1. Navigate to the mod’s settings menu in RimWorld.
 2. Enter your Twitch credentials and configure event triggers.
 3. Customize game responses to Twitch chat events.
 
 # Plugin Development
 
-StreamKit supports third-party plugins, which can register with the mod and
+ColonySync supports third-party plugins, which can register with the mod and
 store persistent settings through the settings api.
 
 ## Example Plugin Code
@@ -63,13 +64,13 @@ public class ExamplePlugin : IKitPlugin
 
 # License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) 
+This project is licensed under the MIT License. See the [LICENSE](LICENSE)
 file for details
 
 # Credits
 
 - **FontAwesome Icons**: This mod uses **FontAwesome SVG icons**, converted to
-  **PNG format** to ensure compatibility with Unity's IMGUI system.
+  **PNG format** to ensure compatibility with Unity’s IMGUI system.
   [FontAwesome Website](https://fontawesome.com)
 
 # Contributing

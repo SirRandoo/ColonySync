@@ -14,42 +14,61 @@ from probe import locate_steam_install
 
 @dataclass(slots=True)
 class Environment:
+    """
+    Represents the environment configuration for locating game install paths.
+
+    Attributes:
+        steam_install_path: The installation path of Steam. Defaults to the result of locate_steam_install().
+
+    Methods:
+        game_install_path: Returns the location of the game's installation path.
+        game_workshop_path: Returns the location of the game's workshop installation path.
+        create_instance: Creates a new instance of the `Environment` class. Raises a ValueError if the Steam installation path could not be found.
+    """
+
     steam_install_path: Path | None = field(default_factory=locate_steam_install)
 
     @property
     def game_install_path(self):
-        """Returns the location of the game's installation path.
+        """
+        @property
+        def game_install_path(self):
+            Retrieves the full directory path where the game RimWorld is installed.
 
-        The game's installation path is where the RimWorld executable file is
-        located, as well as the game's "Mods" folder.
+            This property constructs and returns the path by appending the specific
+            subdirectory "\common\RimWorld" to the base Steam installation path
+            stored in `self.steam_install_path`.
+
+            Returns:
+                Path: The full path to the RimWorld game directory.
         """
         return self.steam_install_path.joinpath("common\\RimWorld")
 
     @property
     def game_workshop_path(self):
-        """Returns the location of the game's workshop installation path.
+        """
+        Return the path to the workshop directory for the game.
 
-        The game's workshop installation path is where Steam saves the workshop
-        content downloaded for the game.
+        The path constructed is based on the Steam installation directory
+        combined with the relative path to the game's workshop directory.
+
+        Returns:
+            Path: The path to the workshop directory for the game.
         """
         return self.steam_install_path.joinpath("workshop\\294100")
 
     @classmethod
-    def create_instance(cls) -> Self:
-        """Creates a new instance of the `Environment` class.
+    def create_instance(cls, dry_run: bool = False) -> Self:
+        """
+        Creates an instance of the class. If a steam installation path file exists, reads the path from the file
+        and initializes the class with it. If the file does not exist, creates a new instance and writes the
+        steam installation path to the file if it is set.
+
+        Returns:
+            Self: An instance of the class.
 
         Raises:
-            ValueError:
-                Raised when the Steam installation path could not be found.
-        Notes:
-            This method will read a special file called ".steam" under the
-            ".run" directory. This file contains the location of the Steam
-            installation directory.
-
-            In the event the file doesn't exist, this method will instead scan
-            the file system, roughly 3 directories deep, for the Steam
-            executable. If it's found, the directory will be saved to said
-            special file for subsequent calls.
+            ValueError: If the steam installation path is not set after creating a new instance.
         """
         steam_path_file: Path = Path(".run\\.steam")
 
@@ -64,7 +83,7 @@ class Environment:
         if instance.steam_install_path is None:
             raise ValueError("Steam installation path is not set")
 
-        if instance.steam_install_path is not None:
+        if instance.steam_install_path is not None and not dry_run:
             with steam_path_file.open("w") as f:
                 f.write(str(instance.steam_install_path))
 

@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <!-- Runtime Properties -->
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+    </PropertyGroup>
+    
+    <!-- NuGet Properties -->
+    <PropertyGroup>
+        <Description>Houses the Biotech compatibility for "ColonySync," a mod for the game "RimWorld."</Description>
+    </PropertyGroup>
+</Project>

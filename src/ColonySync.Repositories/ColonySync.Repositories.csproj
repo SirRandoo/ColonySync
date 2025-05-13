@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <!-- Runtime Properties -->
+    <PropertyGroup>
+        <TargetFrameworks>net48;net9.0</TargetFrameworks>
+    </PropertyGroup>
+    
+    <!-- NuGet Properties -->
+    <PropertyGroup>
+        <Description>Houses code database repositories shared between the web server and the mod ("$(Product)," a mod for the game "RimWorld").</Description>
+    </PropertyGroup>
+    
+    <!-- Project References -->
+    <ItemGroup>
+        <ProjectReference Include="..\ColonySync.Common\ColonySync.Common.csproj"/>
+    </ItemGroup>
+    
+    <!-- Package References -->
+    <ItemGroup>
+        <PackageReference Include="Dapper"/>
+        <PackageReference Include="PolySharp"/>
+        <PackageReference Include="Microsoft.Extensions.Logging"/>
+        <PackageReference Include="System.Collections.Immutable"/>
+        <PackageReference Include="JetBrains.Annotations" PrivateAssets="all"/>
+        <PackageReference Include="NetEscapades.EnumGenerators" ExcludeAssets="runtime"/>
+    </ItemGroup>
+</Project>

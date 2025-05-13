@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LanguageData>
-    <StreamKit.Tables.Transactions.Tooltips.TransactionId>Transaction id: {0}</StreamKit.Tables.Transactions.Tooltips.TransactionId>
-    <StreamKit.Tables.Transactions.Tooltips.PurchasedOn>Purchased on: {0}</StreamKit.Tables.Transactions.Tooltips.PurchasedOn>
-    <StreamKit.Tables.Transactions.Tooltips.Refunded>This transactions was refunded to the viewer.</StreamKit.Tables.Transactions.Tooltips.Refunded>
+    <ColonySync.Tables.Transactions.Tooltips.TransactionId>Transaction id: {0}</ColonySync.Tables.Transactions.Tooltips.TransactionId>
+    <ColonySync.Tables.Transactions.Tooltips.PurchasedOn>Purchased on: {0}</ColonySync.Tables.Transactions.Tooltips.PurchasedOn>
+    <ColonySync.Tables.Transactions.Tooltips.Refunded>This transactions was refunded to the viewer.</ColonySync.Tables.Transactions.Tooltips.Refunded>
 
-    <StreamKit.Tables.Transactions.Headers.Name>Name</StreamKit.Tables.Transactions.Headers.Name>
-    <StreamKit.Tables.Transactions.Headers.Type>Type</StreamKit.Tables.Transactions.Headers.Type>
-    <StreamKit.Tables.Transactions.Headers.Amount>Amount</StreamKit.Tables.Transactions.Headers.Amount>
+    <ColonySync.Tables.Transactions.Headers.Name>Name</ColonySync.Tables.Transactions.Headers.Name>
+    <ColonySync.Tables.Transactions.Headers.Type>Type</ColonySync.Tables.Transactions.Headers.Type>
+    <ColonySync.Tables.Transactions.Headers.Amount>Amount</ColonySync.Tables.Transactions.Headers.Amount>
 </LanguageData>

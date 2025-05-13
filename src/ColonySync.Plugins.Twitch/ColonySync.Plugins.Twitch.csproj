@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <!-- Runtime Properties -->
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+    </PropertyGroup>
+    
+    <!-- NuGet Properties -->
+    <PropertyGroup>
+        <Description>Houses the Twitch client for "ColonySync," a mod for the game "RimWorld."</Description>
+    </PropertyGroup>
+    
+    <!-- Project References -->
+    <ItemGroup>
+        <ProjectReference Include="..\ColonySync.Mod.Api\ColonySync.Mod.Api.csproj"/>
+    </ItemGroup>
+    
+    <!-- Package References -->
+    <ItemGroup>
+        <PackageReference Include="System.Net.Http"/>
+        <PackageReference Include="WebSocketSharp" />
+        <PackageReference Include="System.Text.Json"/>
+        <PackageReference Include="deniszykov.WebSocketListener"/>
+    </ItemGroup>
+</Project>

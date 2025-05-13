@@ -1,5 +1,38 @@
-﻿<Project>
-    <PropertyGroup>
-        <ImplicitUsings>false</ImplicitUsings>
-    </PropertyGroup>
+﻿<Project InitialTargets="DetermineIfRimWorldTarget">
+    <Target Name="DetermineIfRimWorldTarget">
+        <ItemGroup>
+            <FilteredPackageReference Include="@(PackageReference)" Condition="'%(Identity)' == 'Krafs.Rimworld.Ref'" />
+        </ItemGroup>
+        
+        <PropertyGroup>
+            <_RimrefPackageReferenceName>%(FilteredPackageReference.Identity)</_RimrefPackageReferenceName>
+            <_IsRimWorldProject Condition="'$(_RimrefPackageReferenceName)' != ''">true</_IsRimWorldProject>
+            <_IsRimWorldProject Condition="'$(_RimrefPackageReferenceName)' == ''">false</_IsRimWorldProject>
+            <_IsCoreProject Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">true</_IsCoreProject>
+            <_IsCoreProject Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">false</_IsCoreProject>
+        </PropertyGroup>
+    </Target>
+    
+    <Target Name="FindRimWorldVersion" AfterTargets="DetermineIfRimWorldTarget" Condition="'$(UsingMicrosoftNoTargetsSdk)' != 'true' AND '$(_IsRimWorldProject)' == 'true'">
+        <ItemGroup>
+            <FilteredPackageName Include="@(PackageVersion)" Condition="'%(Identity)' == 'Krafs.Rimworld.Ref'"/>
+        </ItemGroup>
+        
+        <PropertyGroup>
+            <RimWorldVersion>%(FilteredPackageName.Version)</RimWorldVersion>
+            <RimWorldVersionMajorMinor>$([System.Version]::Parse('$(RimWorldVersion)').ToString(2))</RimWorldVersionMajorMinor>
+        </PropertyGroup>
+    </Target>
+    
+    <Target Name="ModifyOutputPath" AfterTargets="FindRimWorldVersion" Condition="'$(UsingMicrosoftNoTargetsSdk)' != 'true'">
+        <PropertyGroup Condition="'$(_IsRimWorldProject)' == 'true'">
+            <OutputPath>..\..\Releases\$(RimWorldVersionMajorMinor)\Assemblies\</OutputPath>
+        </PropertyGroup>
+        
+        <PropertyGroup Condition="'$(_IsRimWorldProject)' != 'true' AND '$(_IsCoreProject)' != 'true'">
+            <OutputPath>..\..\Common\Assemblies\</OutputPath>
+        </PropertyGroup>
+        
+        <Message Text="Modified output path of $(ProjectName) to: $(OutputPath)" Importance="high" />
+    </Target>
 </Project>

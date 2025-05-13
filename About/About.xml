@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-    <name>StreamKit</name>
-    <author>SirRandoo</author>
+    <name>ColonySync</name>
+    <author>sirrandoo</author>
     <modVersion>0.1.0</modVersion>
-    <packageId>sirrandoo.streamkit</packageId>
-    <description>A mod for RimWorld that provides chat integration between various streaming platform, like Twitch.</description>
+    <packageId>com.sirrandoo.colonysync</packageId>
+    <description>A mod for RimWorld that provides chat integration between various streaming platforms, like Twitch.</description>
 
     <supportedVersions>
         <li>1.5</li>
@@ -16,11 +16,6 @@
             <displayName>Harmony</displayName>
             <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
             <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
-        </li>
-        <li>
-            <packageId>com.sirrandoo.ux</packageId>
-            <displayName>SirRandoo.UX</displayName>
-            <downloadUrl>https://github.com/sirrandoo/sirrandoo.ux/releases/latest</downloadUrl>
         </li>
     </modDependencies>
 </ModMetaData>

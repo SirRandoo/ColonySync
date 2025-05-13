@@ -31,7 +31,7 @@ CREATE TABLE Sessions
     poll_duration        INT     DEFAULT 0,
 
     /*
-        The minimum number of points viewer have to spend before an order can
+        The minimum number of points a viewer has to spend before an order can
         be made.
      */
     minimum_order_amount INT     DEFAULT 0,
