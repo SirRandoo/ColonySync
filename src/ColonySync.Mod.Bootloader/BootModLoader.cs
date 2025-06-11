@@ -43,21 +43,6 @@ public static class BootModLoader
     private static readonly Dictionary<Type, Verse.Mod> RunningModClassesField =
         AccessTools.StaticFieldRefAccess<Dictionary<Type, Verse.Mod>>("Verse.LoadedModManager:runningModClasses");
 
-    /// <summary>
-    ///     A MethodInfo object representing the 'AssemblyIsUsable' method in the
-    ///     'Verse.ModAssemblyHandler' class.
-    /// </summary>
-    private static readonly MethodInfo AssemblyIsUsableMethodInfo =
-        AccessTools.Method("Verse.ModAssemblyHandler:AssemblyIsUsable");
-
-    /// <summary>
-    ///     A delegate function to determine if an assembly is usable, referring to the
-    ///     'AssemblyIsUsable' method in the 'Verse.ModAssemblyHandler' class.
-    /// </summary>
-    private static readonly Func<ModAssemblyHandler, Assembly, bool> AssemblyIsUsableMethod =
-        (Func<ModAssemblyHandler, Assembly, bool>)Delegate.CreateDelegate(
-            typeof(Func<ModAssemblyHandler, Assembly, bool>), AssemblyIsUsableMethodInfo);
-
     /// <summary>Loads an assembly, and its PDB file if it exists.</summary>
     /// <param name="pack">The mod data being associated with the assembly.</param>
     /// <param name="path">The path to the assembly being loaded.</param>
@@ -88,7 +73,6 @@ public static class BootModLoader
             return null;
         }
 
-        AssemblyIsUsableMethod(pack.assemblies, assembly);
         pack.assemblies.loadedAssemblies.Add(assembly);
 
         return assembly;
