@@ -8,7 +8,6 @@
     <Project Path="src\ColonySync.Mod.Bootloader\ColonySync.Mod.Bootloader.csproj" Type="Classic C#" />
     <Project Path="src\ColonySync.Mod.Core\ColonySync.Mod.Core.csproj" Type="Classic C#" />
     <Project Path="src\ColonySync.Mod.Shared\ColonySync.Mod.Shared.csproj" Type="Classic C#" />
-    <File Path="Corpus.xml" />
   </Folder>
   <Folder Name="/Plugins/">
     <Project Path="src\ColonySync.Plugins.Aliens\ColonySync.Plugins.Aliens.csproj" Type="Classic C#" />

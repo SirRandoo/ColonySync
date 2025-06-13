@@ -1,7 +1,0 @@
-[project]
-name = "ColonySync"
-version = "0.1.0"
-description = "An mod for the game 'RimWorld' that provides stream integration."
-readme = "README.md"
-requires-python = ">=3.13"
-dependencies = []
