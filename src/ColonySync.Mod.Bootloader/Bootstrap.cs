@@ -43,35 +43,72 @@ namespace ColonySync.Mod.Bootloader;
 [SuppressMessage(category: "ReSharper", checkId: "BuiltInTypeReferenceStyleForMemberAccess")]
 internal static class Bootstrap
 {
-    private static readonly string? NativeExtension = GetNativeExtension();
-    private static readonly XmlSerializer Serializer = new(typeof(Corpus));
-    private static readonly List<string> SpecialFiles = [];
-
     static Bootstrap()
     {
         Log.Message($"[ColonySync.Bootstrapper] :: ColonySync is running on the platform '{UnityData.platform}'");
 
-        if (string.IsNullOrEmpty(NativeExtension))
+        DisableHarmonyStacktraceCaching();
+        DisableHarmonyStacktraceEnhancing();
+
+        string modDirectory = LoadedModManager.GetMod<BootstrapMod>().Content.RootDir;
+        string releasesDirectory = Path.Combine(modDirectory, "Releases");
+
+        AppendNativeDirectoryToLookupPath(releasesDirectory);
+        LoadDeferredAssemblies(releasesDirectory);
+    }
+
+    private static void AppendNativeDirectoryToLookupPath(string directory)
+    {
+        if (UnityData.platform is not (RuntimePlatform.WindowsPlayer or RuntimePlatform.OSXPlayer or RuntimePlatform.LinuxPlayer))
         {
-            Log.Error(
-                $"[ColonySync.Bootstrapper] :: '{UnityData.platform}' is an unsupported platform; Aborting initialization...");
+            Log.Error("[ColonySync.Bootstrapper] :: Running StreamKit on an unsupported operating system; aborting modifying native resolution path...");
 
             return;
         }
 
-        DisableHarmonyStacktraceCaching();
-        DisableHarmonyStacktraceEnhancing();
+        string nativesDirectory = Path.Combine(directory, "natives");
 
-        Application.wantsToQuit += CleanNativeFiles;
+        if (nativesDirectory[^1] != Path.PathSeparator) nativesDirectory += Path.PathSeparator;
 
-        foreach (var mod in LoadedModManager.RunningMods)
+        switch (UnityData.platform)
         {
-            var corpusPath = Path.Combine(mod.RootDir, path2: "Corpus.xml");
+            case RuntimePlatform.WindowsPlayer:
+                AddNativeDirectoryToPath(nativesDirectory);
 
-            if (!File.Exists(corpusPath)) continue;
+                break;
+            case RuntimePlatform.OSXPlayer:
+                AddNativeDirectoryToFrameworkPath(nativesDirectory);
 
-            LoadContent(mod, corpusPath);
+                break;
+            case RuntimePlatform.LinuxPlayer:
+                AddNativeDirectoryToLibraryPath(nativesDirectory);
+
+                break;
         }
+    }
+
+    private static void AddNativeDirectoryToFrameworkPath(string directory)
+    {
+        const string frameworkPathKey = "DYLD_FRAMEWORK_PATH";
+        string? frameworkVariable = Environment.GetEnvironmentVariable(frameworkPathKey);
+
+        Environment.SetEnvironmentVariable(frameworkPathKey, string.IsNullOrWhiteSpace(frameworkVariable) ? $"{directory}:" : $"{directory}:{frameworkVariable}");
+    }
+
+    private static void AddNativeDirectoryToLibraryPath(string directory)
+    {
+        const string libraryPathKey = "LD_LIBRARY_PATH";
+        string? libraryVariable = Environment.GetEnvironmentVariable(libraryPathKey);
+
+        Environment.SetEnvironmentVariable(libraryPathKey, string.IsNullOrWhiteSpace(libraryVariable) ? $"{directory}:" : $"{libraryVariable}:{directory}");
+    }
+
+    private static void AddNativeDirectoryToPath(string directory)
+    {
+        const string pathKey = "PATH";
+        string? pathEnvVariable = Environment.GetEnvironmentVariable(pathKey);
+
+        Environment.SetEnvironmentVariable(pathKey, string.IsNullOrWhiteSpace(pathEnvVariable) ? $"{directory};" : $"{pathEnvVariable};{directory}");
     }
 
     /// <summary>
@@ -126,137 +163,38 @@ internal static class Bootstrap
     }
 
     /// <summary>
-    ///     Deletes all files listed in the SpecialFiles list. Logs any errors encountered during the
-    ///     deletion process.
+    ///     Loads assemblies meant to be loaded independently of RimWorld load sequence.
     /// </summary>
-    /// <returns>
-    ///     Returns true if the operation completes, regardless of success or failure of the
-    ///     deletions.
-    /// </returns>
-    private static bool CleanNativeFiles()
+    /// <param name="directory">The directory to load recursively load assemblies from.</param>
+    private static void LoadDeferredAssemblies(string directory)
     {
-        for (var index = 0; index < SpecialFiles.Count; index++)
-        {
-            var file = SpecialFiles[index];
+        List<Assembly> loadedAssemblies = [];
+        var modContentPack = LoadedModManager.GetMod<BootstrapMod>().Content;
 
-            try
+        foreach (string file in Directory.EnumerateFiles(directory, "*.dll", SearchOption.AllDirectories))
+        {
+            var assembly = BootModLoader.LoadAssembly(modContentPack, file);
+
+            if (assembly == null)
             {
-                File.Delete(file);
+                Log.Error($"[ColonySync.Bootstrapper] :: Could not load assembly @ {file} -- things will not work properly.");
+
+                continue;
             }
-            catch (Exception e)
-            {
-                Log.Error($"[ColonySync.Bootstrapper] :: Could not clean file @ {file}" + e);
-                Log.Warning(
-                    $"[ColonySync.Bootstrapper] :: Any mod updates pending to {file} may not go through next relaunch");
-            }
+
+            loadedAssemblies.Add(assembly);
         }
 
-        return true;
-    }
-
-    /// <summary>
-    ///     Loads and deserializes XML content from the specified corpus path, then processes the
-    ///     loaded resources for the given mod.
-    /// </summary>
-    /// <param name="mod">The mod content pack for which the content is being loaded.</param>
-    /// <param name="corpusPath">The file path to the XML corpus containing the content to load.</param>
-    private static void LoadContent(ModContentPack mod, string corpusPath)
-    {
-        Corpus? corpus;
-
-        using (var stream = File.Open(corpusPath, FileMode.Open, FileAccess.Read))
-        {
-            corpus = Serializer.Deserialize(stream) as Corpus;
-        }
-
-        if (corpus is null)
-        {
-            Log.Error(
-                $"[ColonySync.Bootstrapper] :: Object within corpus file for {mod.Name} was malformed. Aborting...");
-
-            return;
-        }
-
-        LoadResources(mod, corpus);
-    }
-
-    /// <summary>Loads the resources specified in the given corpus into the provided mod content pack.</summary>
-    /// <param name="mod">The mod content pack where resources are loaded.</param>
-    /// <param name="corpus">The corpus containing resources to be loaded.</param>
-    private static void LoadResources(ModContentPack mod, Corpus corpus)
-    {
-        foreach (var bundle in corpus.Resources) LoadResourceBundle(mod, bundle);
-    }
-
-    /// <summary>
-    ///     Loads a resource bundle for a given mod, handling various resource types such as DLLs,
-    ///     assemblies, and standard managed files.
-    /// </summary>
-    /// <param name="mod">The mod content pack containing the resources.</param>
-    /// <param name="bundle">The resource bundle to be loaded.</param>
-    private static void LoadResourceBundle(ModContentPack mod, ResourceBundle bundle)
-    {
-        var path = GetPathFor(mod, bundle);
-
-        if (!Directory.Exists(path))
-        {
-            Log.Error(
-                $"[ColonySync.Bootstrapper] :: The directory {path} doesn't exist, but was specified in {mod.Name}'s corpus. Aborting...");
-
-            return;
-        }
-
-        var assemblyCandidates = new List<Assembly>();
-
-        foreach (var resource in bundle.Resources)
-        {
-            var resourceDir = string.IsNullOrEmpty(resource.Root)
-                ? Path.GetFullPath(path)
-                : Path.GetFullPath(Path.Combine(path, resource.Root));
-
-            switch (resource.Type)
-            {
-                case ResourceType.Dll:
-                    CopyNativeFile(resource, resourceDir);
-
-                    break;
-                case ResourceType.Assembly:
-                    var assembly = BootModLoader.LoadAssembly(
-                        mod,
-                        string.IsNullOrEmpty(resource.Root)
-                            ? Path.Combine(path, path2: "Assemblies", $"{resource.Name}.dll")
-                            : Path.Combine(path, resource.Root, path3: "Assemblies", $"{resource.Name}.dll")
-                    );
-
-                    if (assembly == null) break;
-
-                    assemblyCandidates.Add(assembly);
-
-                    break;
-                case ResourceType.NetStandardAssembly:
-                    CopyStandardManagedFile(resource, resourceDir);
-
-                    break;
-                default:
-                    Log.Warning(
-                        @$"[ColonySync.Bootstrapper] :: Cannot load resource ""{resource.Name}"" due to an unsupported type of ""{resource.Type.ToStringFast()}""");
-
-                    break;
-            }
-        }
-
-        if (assemblyCandidates.Count <= 0) return;
-
-        foreach (var assembly in assemblyCandidates)
+        foreach (var assembly in loadedAssemblies)
         {
             try
             {
-                BootModLoader.InstantiateModClasses(mod, assembly);
+                BootModLoader.InstantiateModClasses(modContentPack, assembly);
             }
             catch (Exception e)
             {
                 Log.Error(
-                    $"[ColonySync.Bootstrapper] :: Encountered one or more errors while instantiating mod classes for assembly {assembly.GetName()} from {mod.PackageId}" +
+                    $"[ColonySync.Bootstrapper] :: Encountered one or more errors while instantiating mod classes for assembly {assembly.GetName()} from {modContentPack.PackageId}" +
                     e
                 );
             }
@@ -268,103 +206,10 @@ internal static class Bootstrap
             catch (Exception e)
             {
                 Log.Error(
-                    $"[ColonySync.Bootstrapper] :: Encounter one or more errors while running static constructors for assembly {assembly.GetName()} from {mod.PackageId}" +
+                    $"[ColonySync.Bootstrapper] :: Encounter one or more errors while running static constructors for assembly {assembly.GetName()} from {modContentPack.PackageId}" +
                     e
                 );
             }
         }
-    }
-
-    /// <summary>Copies a native file from the resource directory to the current directory.</summary>
-    /// <param name="resource">The resource representing the file to be copied.</param>
-    /// <param name="resourceDir">The directory where the resource file is located.</param>
-    private static void CopyNativeFile(Resource resource, string resourceDir)
-    {
-        var fileName = $"{resource.Name}.{NativeExtension}";
-        var resourcePath = Path.Combine(resourceDir, $"{resource.Name}.{NativeExtension}");
-        var destinationPath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
-
-        if (File.Exists(destinationPath) || !File.Exists(resourcePath) && resource.Optional) return;
-
-        try
-        {
-            File.Copy(resourcePath, destinationPath);
-
-            SpecialFiles.Add(destinationPath);
-        }
-        catch (Exception e)
-        {
-            Log.Error(
-                $"[ColonySync.Bootstrapper] :: Could not copy {fileName} to {destinationPath} (from {resourcePath}). Things will not work correctly" +
-                e);
-        }
-    }
-
-
-    /// <summary>
-    ///     Copies a managed assembly file from the specified resource directory to the current
-    ///     working directory if it does not already exist.
-    /// </summary>
-    /// <param name="resource">The resource representing the managed assembly file to copy.</param>
-    /// <param name="resourceDir">The directory path where the resource is located.</param>
-    private static void CopyStandardManagedFile(Resource resource, string resourceDir)
-    {
-        var fileName = $"{resource.Name}.dll";
-        var resourcePath = Path.Combine(resourceDir, $"{resource.Name}.dll");
-        var destinationPath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
-
-        if (File.Exists(destinationPath)) return;
-
-        try
-        {
-            File.Copy(resourcePath, destinationPath);
-
-            SpecialFiles.Add(destinationPath);
-        }
-        catch (Exception e)
-        {
-            Log.Error(
-                $"[ColonySync.Bootstrapper] :: Could not copy {fileName} to {destinationPath} (from {resourcePath}). Things will not work correctly" +
-                e);
-        }
-    }
-
-    /// <summary>
-    ///     Retrieves the path for the specified mod content pack and resource bundle. The path is
-    ///     constructed based on the root directory of the mod and the properties of the resource bundle,
-    ///     such as the root and versioning.
-    /// </summary>
-    /// <param name="mod">The mod content pack for which the path is being retrieved.</param>
-    /// <param name="bundle">The resource bundle whose path is being constructed.</param>
-    /// <returns>A string representing the path to the specified resource bundle.</returns>
-    private static string GetPathFor(ModContentPack mod, ResourceBundle bundle)
-    {
-        var root = mod.RootDir;
-
-        if (!string.IsNullOrEmpty(bundle.Root)) root = Path.Combine(root, bundle.Root);
-
-        if (!bundle.Versioned) return root;
-
-        var withoutBuild = Path.Combine(root, VersionControl.CurrentVersionString);
-
-        return Directory.Exists(withoutBuild)
-            ? withoutBuild
-            : Path.Combine(root, VersionControl.CurrentVersionStringWithoutBuild);
-    }
-
-    /// <summary>Determines the native file extension for the current runtime platform.</summary>
-    /// <returns>
-    ///     A string representing the file extension for the current platform (.dll for Windows, .so
-    ///     for Linux, .dylib for OSX). If the platform is not recognized, returns null.
-    /// </returns>
-    private static string? GetNativeExtension()
-    {
-        return UnityData.platform switch
-        {
-            RuntimePlatform.WindowsPlayer => ".dll",
-            RuntimePlatform.LinuxPlayer => ".so",
-            RuntimePlatform.OSXPlayer => ".dylib",
-            _ => null
-        };
     }
 }
