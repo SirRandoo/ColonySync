@@ -10,6 +10,10 @@
             <_IsRimWorldProject Condition="'$(_RimrefPackageReferenceName)' == ''">false</_IsRimWorldProject>
             <_IsCoreProject Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">true</_IsCoreProject>
             <_IsCoreProject Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">false</_IsCoreProject>
+            <_IsPluginProject Condition="$(MSBuildProjectName.Contains('.Plugins.'))">true</_IsPluginProject>
+            <_IsPluginProject Condition="!$(MSBuildProjectName.Contains('.Plugins.'))">false</_IsPluginProject>
+            <_PluginName Condition="$(_IsPluginProject)">$(MSBuildProjectName.Substring($(MSBuildProjectName.IndexOf('.Plugins.'))))</_PluginName>
+            <_PluginName Condition="$(_IsPluginProject)">$(_PluginName.Substring(9))</_PluginName>
         </PropertyGroup>
     </Target>
     
@@ -27,14 +31,18 @@
     </Target>
     
     <Target Name="ModifyOutputPath" AfterTargets="FindRimWorldVersion" Condition="'$(UsingMicrosoftNoTargetsSdk)' != 'true'">
-        <PropertyGroup Condition="'$(_IsRimWorldProject)' == 'true'">
+        <PropertyGroup Condition="$(_IsRimWorldProject)">
             <OutputPath>..\..\Releases\$(RimWorldVersionMajorMinor)\Assemblies\</OutputPath>
         </PropertyGroup>
         
-        <PropertyGroup Condition="'$(_IsRimWorldProject)' != 'true' AND '$(_IsCoreProject)' != 'true'">
-            <OutputPath>..\..\Common\Assemblies\</OutputPath>
+        <PropertyGroup Condition="'$(_IsRimWorldProject)' != 'true' AND '$(_IsCoreProject)' != 'true' AND '$(_IsPluginProject)' != 'true'">
+            <OutputPath>..\..\Releases\Core\Assemblies\</OutputPath>
+        </PropertyGroup>
+
+        <PropertyGroup Condition="$(_IsPluginProject)">
+            <OutputPath>..\..\Releases\Plugins\$(_PluginName)\Assemblies\</OutputPath>
         </PropertyGroup>
         
-        <Message Text="Modified output path of $(ProjectName) to: $(OutputPath)" Importance="high" />
+        <Message Text="Modified output path of $(MSBuildProjectName) to: $(OutputPath)" Importance="high" />
     </Target>
 </Project>
