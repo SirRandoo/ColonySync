@@ -20,7 +20,9 @@
         
         <PropertyGroup>
             <RimWorldVersion>%(FilteredPackageName.Version)</RimWorldVersion>
-            <RimWorldVersionMajorMinor>$([System.Version]::Parse('$(RimWorldVersion)').ToString(2))</RimWorldVersionMajorMinor>
+            <CleanedRimWorldVersion Condition="$(RimWorldVersion.Contains('-'))">$(RimWorldVersion.Substring(0, $(RimWorldVersion.IndexOf('-'))))</CleanedRimWorldVersion>
+            <CleanedRimWorldVersion Condition="!$(RimWorldVersion.Contains('-'))">$(RimWorldVersion)</CleanedRimWorldVersion>
+            <RimWorldVersionMajorMinor>$([System.Version]::Parse('$(CleanedRimWorldVersion)').ToString(2))</RimWorldVersionMajorMinor>
         </PropertyGroup>
     </Target>
     
