@@ -1,79 +1,67 @@
 <Project>
-    <PropertyGroup>
-        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    </PropertyGroup>
-    
-    <!-- Logging Packages -->
-    <ItemGroup>
-        <PackageVersion Include="NLog" Version="5.4.0"/>
-    </ItemGroup>
-    
-    <!-- Dependency Injection Packages -->
-    <ItemGroup>
-        <PackageVersion Include="NLog.Extensions.Logging" Version="5.4.0"/>
-        <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.4"/>
-        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.4"/>
-        <PackageVersion Include="Microsoft.Extensions.Logging" Version="9.0.4"/>
-        <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4"/>
-        <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.4"/>
-    </ItemGroup>
-    
-    <!-- RimWorld Related Packages -->
-    <ItemGroup>
-        <PackageVersion Include="Lib.Harmony" Version="2.3.6"/>
-        <PackageVersion Include="Krafs.Rimworld.Ref" Version="1.6.4489-beta"/>
-        <PackageVersion Include="RimWorld.MultiplayerAPI" Version="0.5.0"/>
-    </ItemGroup>
-    
-    <!-- I/O Packages -->
-    <ItemGroup>
-        <PackageVersion Include="System.Net.Http" Version="4.3.4"/>
-        <PackageVersion Include="WebSocketSharp" Version="1.0.3-rc11" />
-        <PackageVersion Include="deniszykov.WebSocketListener" Version="4.2.16"/>
-    </ItemGroup>
-    
-    <!-- Database Packages -->
-    <ItemGroup>
-        <PackageVersion Include="Npgsql" Version="9.0.3"/>
-        <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.2"/>
-    </ItemGroup>
-    
-    <!-- Database Interface Packages -->
-    <ItemGroup>
-        <PackageVersion Include="Dapper" Version="2.1.66"/>
-    </ItemGroup>
-    
-    <!-- Data Format Packages -->
-    <ItemGroup>
-        <PackageVersion Include="System.Text.Json" Version="9.0.4"/>
-        <PackageVersion Include="Samboy063.Tomlet" Version="6.0.0"/>
-        <PackageVersion Include="FlatSharp.Runtime" Version="7.8.0"/>
-        <PackageVersion Include="FlatSharp.Compiler" Version="7.8.0"/>
-    </ItemGroup>
-    
-    <!-- Generator Packages -->
-    <ItemGroup>
-        <PackageVersion Include="PolySharp" Version="1.15.0"/>
-        <PackageVersion Include="NetEscapades.EnumGenerators" Version="1.0.0-beta09"/>
-    </ItemGroup>
-    
-    <!-- False Data Packages -->
-    <ItemGroup>
-        <PackageVersion Include="Bogus" Version="35.6.3"/>
-    </ItemGroup>
-    
-    <!-- Annotation Packages -->
-    <ItemGroup>
-        <PackageVersion Include="JetBrains.Annotations" Version="2024.3.0"/>
-    </ItemGroup>
-    
-    <!-- Data Structure Packages -->
-    <ItemGroup>
-        <PackageVersion Include="System.Collections.Immutable" Version="9.0.4"/>
-    </ItemGroup>
-    
-    <!-- Angular Packages -->
-    <ItemGroup>
-        <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="9.0.4"/>
-    </ItemGroup>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <!-- Logging Packages -->
+  <ItemGroup>
+    <PackageVersion Include="NLog" Version="5.5.0" />
+  </ItemGroup>
+  <!-- Dependency Injection Packages -->
+  <ItemGroup>
+    <PackageVersion Include="NLog.Extensions.Logging" Version="5.5.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.6" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="9.0.6" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.6" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.6" />
+  </ItemGroup>
+  <!-- RimWorld Related Packages -->
+  <ItemGroup>
+    <PackageVersion Include="Lib.Harmony" Version="2.3.6" />
+    <PackageVersion Include="Krafs.Rimworld.Ref" Version="1.6.4489-beta" />
+    <PackageVersion Include="RimWorld.MultiplayerAPI" Version="0.5.0" />
+  </ItemGroup>
+  <!-- I/O Packages -->
+  <ItemGroup>
+    <PackageVersion Include="System.Net.Http" Version="4.3.4" />
+    <PackageVersion Include="WebSocketSharp" Version="1.0.3-rc11" />
+    <PackageVersion Include="deniszykov.WebSocketListener" Version="4.2.16" />
+  </ItemGroup>
+  <!-- Database Packages -->
+  <ItemGroup>
+    <PackageVersion Include="Npgsql" Version="9.0.3" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.2" />
+  </ItemGroup>
+  <!-- Database Interface Packages -->
+  <ItemGroup>
+    <PackageVersion Include="Dapper" Version="2.1.66" />
+  </ItemGroup>
+  <!-- Data Format Packages -->
+  <ItemGroup>
+    <PackageVersion Include="System.Text.Json" Version="9.0.6" />
+    <PackageVersion Include="Samboy063.Tomlet" Version="6.1.0" />
+    <PackageVersion Include="FlatSharp.Runtime" Version="7.9.0" />
+    <PackageVersion Include="FlatSharp.Compiler" Version="7.9.0" />
+  </ItemGroup>
+  <!-- Generator Packages -->
+  <ItemGroup>
+    <PackageVersion Include="PolySharp" Version="1.15.0" />
+    <PackageVersion Include="NetEscapades.EnumGenerators" Version="1.0.0-beta09" />
+  </ItemGroup>
+  <!-- False Data Packages -->
+  <ItemGroup>
+    <PackageVersion Include="Bogus" Version="35.6.3" />
+  </ItemGroup>
+  <!-- Annotation Packages -->
+  <ItemGroup>
+    <PackageVersion Include="JetBrains.Annotations" Version="2024.3.0" />
+  </ItemGroup>
+  <!-- Data Structure Packages -->
+  <ItemGroup>
+    <PackageVersion Include="System.Collections.Immutable" Version="9.0.6" />
+  </ItemGroup>
+  <!-- Angular Packages -->
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="9.0.6" />
+  </ItemGroup>
 </Project>
