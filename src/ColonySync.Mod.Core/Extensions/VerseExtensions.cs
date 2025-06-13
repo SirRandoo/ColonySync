@@ -54,7 +54,6 @@ using Verse;
 [assembly: EnumExtensions<PollutionLevel>(ExtensionClassNamespace = "ColonySync.Mod.Core.Extensions")]
 [assembly: EnumExtensions<Traversability>(ExtensionClassNamespace = "ColonySync.Mod.Core.Extensions")]
 [assembly: EnumExtensions<GeneticBodyType>(ExtensionClassNamespace = "ColonySync.Mod.Core.Extensions")]
-[assembly: EnumExtensions<MechWeightClass>(ExtensionClassNamespace = "ColonySync.Mod.Core.Extensions")]
 [assembly: EnumExtensions<PawnHealthState>(ExtensionClassNamespace = "ColonySync.Mod.Core.Extensions")]
 [assembly: EnumExtensions<PawnRenderFlags>(ExtensionClassNamespace = "ColonySync.Mod.Core.Extensions")]
 [assembly: EnumExtensions<TooltipPriority>(ExtensionClassNamespace = "ColonySync.Mod.Core.Extensions")]

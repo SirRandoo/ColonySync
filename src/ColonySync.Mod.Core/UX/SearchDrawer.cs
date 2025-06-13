@@ -80,7 +80,7 @@ public sealed class TextField
     {
         get
         {
-            if (_editor.cursorIndex == _editor.selectIndex) return IntRange.zero;
+            if (_editor.cursorIndex == _editor.selectIndex) return IntRange.Zero;
 
             return _editor.cursorIndex < _editor.selectIndex
                 ? new IntRange(_editor.cursorIndex, _editor.selectIndex - _editor.cursorIndex)

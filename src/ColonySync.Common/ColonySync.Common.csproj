@@ -12,9 +12,15 @@
     <!-- Package References -->
     <ItemGroup>
         <PackageReference Include="PolySharp"/>
-        <PackageReference Include="System.Text.Json"/>
-        <PackageReference Include="Microsoft.Extensions.Logging"/>
-        <PackageReference Include="System.Collections.Immutable"/>
+        <PackageReference Include="System.Text.Json">
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Logging">
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="System.Collections.Immutable">
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
         <PackageReference Include="JetBrains.Annotations" PrivateAssets="all"/>
         <PackageReference Include="NetEscapades.EnumGenerators" ExcludeAssets="runtime"/>
     </ItemGroup>

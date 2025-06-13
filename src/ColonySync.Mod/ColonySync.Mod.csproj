@@ -3,23 +3,25 @@
     <PropertyGroup>
         <TargetFramework>net48</TargetFramework>
     </PropertyGroup>
-    
+
     <!-- NuGet Properties -->
     <PropertyGroup>
         <Description>Houses the Unity implementation for "$(ColonySync)," a mod for the game "RimWorld."</Description>
     </PropertyGroup>
-    
+
     <!-- Project References -->
     <ItemGroup>
-        <ProjectReference Include="..\ColonySync.Common\ColonySync.Common.csproj"/>
+        <ProjectReference Include="..\ColonySync.Common\ColonySync.Common.csproj">
+            <PrivateAssets>all</PrivateAssets>
+        </ProjectReference>
     </ItemGroup>
-    
+
     <!-- Package References -->
     <ItemGroup>
         <PackageReference Include="Lib.Harmony" ExcludeAssets="runtime"/>
         <PackageReference Include="Krafs.Rimworld.Ref" PrivateAssets="runtime"/>
     </ItemGroup>
-    
+
     <ItemGroup>
         <Folder Include="Application\"/>
         <Folder Include="Infrastructure\"/>
