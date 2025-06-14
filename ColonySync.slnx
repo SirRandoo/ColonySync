@@ -11,15 +11,11 @@
   </Folder>
   <Folder Name="/Plugins/">
     <Project Path="src\ColonySync.Plugins.Aliens\ColonySync.Plugins.Aliens.csproj" Type="Classic C#" />
-    <Project Path="src\ColonySync.Plugins.Androids\ColonySync.Plugins.Androids.csproj" Type="Classic C#" />
     <Project Path="src\ColonySync.Plugins.Anomaly\ColonySync.Plugins.Anomaly.csproj" Type="Classic C#" />
     <Project Path="src\ColonySync.Plugins.Biotech\ColonySync.Plugins.Biotech.csproj" Type="Classic C#" />
-    <Project Path="src\ColonySync.Plugins.Exceptions\ColonySync.Plugins.Exceptions.csproj" Type="Classic C#" />
     <Project Path="src\ColonySync.Plugins.Ideology\ColonySync.Plugins.Ideology.csproj" Type="Classic C#" />
     <Project Path="src\ColonySync.Plugins.Magic\ColonySync.Plugins.Magic.csproj" Type="Classic C#" />
     <Project Path="src\ColonySync.Plugins.Odyssey\ColonySync.Plugins.Odyssey.csproj" Type="Classic C#" />
-    <Project Path="src\ColonySync.Plugins.Research\ColonySync.Plugins.Research.csproj" Type="Classic C#" />
-    <Project Path="src\ColonySync.Plugins.Sidearms\ColonySync.Plugins.Sidearms.csproj" Type="Classic C#" />
     <Project Path="src\ColonySync.Plugins.Twitch\ColonySync.Plugins.Twitch.csproj" Type="Classic C#" />
     <Project Path="src\ColonySync.Plugins.Winston\ColonySync.Plugins.Winston.csproj" Type="Classic C#" />
   </Folder>
