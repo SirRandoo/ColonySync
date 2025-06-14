@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Plugin Id="com.sirrandoo.colonysync.ideology" Name="ColonySync - Ideology Compatibility">
+    <RequiredExpansion Id="ludeon.ideology" />
+</Plugin>

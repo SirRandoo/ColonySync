@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Plugin Id="com.sirrandoo.colonysync.magic" Name="ColonySync - A RimWorld of Magic Compatibility">
+    <RequiredMod Id="Torann.ARimworldOfMagic" />
+</Plugin>

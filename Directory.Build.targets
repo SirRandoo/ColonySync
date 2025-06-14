@@ -45,4 +45,12 @@
         
         <Message Text="Modified output path of $(MSBuildProjectName) to: $(OutputPath)" Importance="high" />
     </Target>
+
+    <Target Name="CopyPluginManifest" AfterTargets="ModifyOutputPath" Condition="'$(UsingMicrosoftNoTargetsSdk)' != 'true' AND '$(_IsPluginProject)' == 'true'">
+        <!--
+        We're copying the "Plugin.xml" file within the plugin projects to the root plugin directory,
+        not the "Assemblies" folder within the plugin directory.
+         -->
+        <Copy SourceFiles="$(MSBuildProjectDirectory)\Plugin.xml" DestinationFolder="$(OutputPath)..\" SkipUnchangedFiles="true" />
+    </Target>
 </Project>

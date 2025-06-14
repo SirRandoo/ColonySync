@@ -43,6 +43,8 @@ namespace ColonySync.Mod.Bootloader;
 [SuppressMessage(category: "ReSharper", checkId: "BuiltInTypeReferenceStyleForMemberAccess")]
 internal static class Bootstrap
 {
+    private static readonly XmlSerializer PluginSerializer = new(typeof(Plugin));
+
     static Bootstrap()
     {
         Log.Message($"[ColonySync.Bootstrapper] :: ColonySync is running on the platform '{UnityData.platform}'");
@@ -170,19 +172,35 @@ internal static class Bootstrap
     {
         List<Assembly> loadedAssemblies = [];
         var modContentPack = LoadedModManager.GetMod<BootstrapMod>().Content;
+        var foundPluginDirectory = false;
 
-        foreach (string file in Directory.EnumerateFiles(directory, "*.dll", SearchOption.AllDirectories))
+        foreach (string subdirectory in Directory.EnumerateDirectories(directory, "*", SearchOption.TopDirectoryOnly))
         {
-            var assembly = BootModLoader.LoadAssembly(modContentPack, file);
-
-            if (assembly == null)
+            if (string.Equals(subdirectory, "Plugins", StringComparison.OrdinalIgnoreCase))
             {
-                Log.Error($"[ColonySync.Bootstrapper] :: Could not load assembly @ {file} -- things will not work properly.");
+                foundPluginDirectory = true;
 
                 continue;
             }
 
-            loadedAssemblies.Add(assembly);
+            foreach (string file in Directory.EnumerateFiles(subdirectory, "*.dll", SearchOption.AllDirectories))
+            {
+                var assembly = BootModLoader.LoadAssembly(modContentPack, file);
+
+                if (assembly == null)
+                {
+                    Log.Error($"[ColonySync.Bootstrapper] :: Could not load assembly @ {file} -- things will not work properly.");
+
+                    continue;
+                }
+
+                loadedAssemblies.Add(assembly);
+            }
+        }
+
+        if (foundPluginDirectory)
+        {
+            loadedAssemblies.AddRange(LoadDeferredPlugins(Path.Combine(directory, "Plugins"), modContentPack));
         }
 
         foreach (var assembly in loadedAssemblies)
@@ -211,5 +229,61 @@ internal static class Bootstrap
                 );
             }
         }
+    }
+
+    private static IEnumerable<Assembly> LoadDeferredPlugins(string directory, ModContentPack content)
+    {
+        foreach (string subdirectory in Directory.EnumerateDirectories(directory, "*", SearchOption.TopDirectoryOnly))
+        {
+            string pluginFile = Path.Combine(subdirectory, "Plugin.xml");
+
+            if (File.Exists(pluginFile) && !PluginRequirementsMet(pluginFile)) continue;
+
+            foreach (string file in Directory.EnumerateFiles(subdirectory, "*.dll", SearchOption.AllDirectories))
+            {
+                var assembly = BootModLoader.LoadAssembly(content, file);
+
+                if (assembly == null)
+                {
+                    Log.Error($"[ColonySync.Bootstrapper] :: Could not load assembly @ {file} -- things will not work properly.");
+
+                    continue;
+                }
+
+                yield return assembly;
+            }
+        }
+    }
+
+    private static bool PluginRequirementsMet(string pluginFilePath)
+    {
+        using (var stream = File.OpenRead(pluginFilePath))
+        {
+            var plugin = PluginSerializer.Deserialize(stream) as Plugin;
+
+            if (plugin == null) return true;
+
+            if (plugin.RequiredExpansions is { Length: > 0 })
+            {
+                foreach (var expansionRequirement in plugin.RequiredExpansions)
+                {
+                    if (ModLister.GetExpansionWithIdentifier(expansionRequirement.Id) != null) continue;
+                    Log.Error($"[ColonySync.Bootstrapper] :: Plugin {plugin.Id} requires expansion {expansionRequirement.Id} to be installed.");
+
+                    return false;
+                }
+            }
+
+            if (plugin.RequiredMods is not { Length: > 0 }) return true;
+
+            foreach (var modRequirement in plugin.RequiredMods)
+            {
+                if (ModLister.GetActiveModWithIdentifier(modRequirement.Id) != null) continue;
+
+                Log.Error($"[ColonySync.Bootstrapper] :: Plugin {plugin.Id} requires mod {modRequirement.Id} to be installed.");
+            }
+        }
+
+        return true;
     }
 }

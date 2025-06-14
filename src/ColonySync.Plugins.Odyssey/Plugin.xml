@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Plugin Id="com.sirrandoo.colonysync.odyssey" Name="ColonySync - Odyssey Compatibility">
+    <RequiredExpansion Id="ludeon.odyssey" />
+</Plugin>
