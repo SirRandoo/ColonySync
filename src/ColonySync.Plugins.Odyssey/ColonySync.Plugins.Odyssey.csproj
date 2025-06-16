@@ -10,7 +10,4 @@
     </PropertyGroup>
     
     <!-- Project References -->
-    <ItemGroup>
-        <ProjectReference Include="..\ColonySync.Mod.Api\ColonySync.Mod.Api.csproj"/>
-    </ItemGroup>
 </Project>

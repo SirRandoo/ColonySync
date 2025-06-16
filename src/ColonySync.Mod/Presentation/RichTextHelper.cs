@@ -43,14 +43,12 @@ public static class RichTextHelper
     /// </remarks>
     public static bool IsRichText(this string source)
     {
-        var tagStart = -1;
-
-        // ReSharper disable once SuggestVarOrType_Elsewhere
+        int tagStart = -1;
         var span = source.AsSpan();
 
         for (var i = 0; i < span.Length; i++)
         {
-            var current = span[i];
+            char current = span[i];
 
             switch (current)
             {
@@ -77,7 +75,7 @@ public static class RichTextHelper
     /// </remarks>
     public static string StripTags(this string input)
     {
-        var tagStart = -1;
+        int tagStart = -1;
         var builder = new StringBuilder();
 
         // ReSharper disable once SuggestVarOrType_Elsewhere
@@ -85,7 +83,7 @@ public static class RichTextHelper
 
         for (var i = 0; i < span.Length; i++)
         {
-            var current = span[i];
+            char current = span[i];
 
             switch (current)
             {

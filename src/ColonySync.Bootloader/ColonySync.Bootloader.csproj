@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <!-- Runtime Properties -->
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+    </PropertyGroup>
+    
+    <!-- Package References -->
+    <ItemGroup>
+        <PackageReference Include="NLog"/>
+        <PackageReference Include="PolySharp" ExcludeAssets="runtime"/>
+        <PackageReference Include="Lib.Harmony" ExcludeAssets="runtime"/>
+        <PackageReference Include="Krafs.Rimworld.Ref" ExcludeAssets="runtime"/>
+        <PackageReference Include="NetEscapades.EnumGenerators" ExcludeAssets="runtime"/>
+    </ItemGroup>
+</Project>

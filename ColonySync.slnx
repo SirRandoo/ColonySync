@@ -1,14 +1,4 @@
 ﻿<Solution>
-  <Folder Name="/Infrastructure/">
-    <Project Path="src\ColonySync.Mod.Infrastructure\ColonySync.Mod.Infrastructure.csproj" Type="Classic C#" />
-    <Project Path="src\ColonySync.Server.Infrastructure\ColonySync.Server.Infrastructure.csproj" Type="Classic C#" />
-  </Folder>
-  <Folder Name="/Mod/">
-    <Project Path="src\ColonySync.Mod.Api\ColonySync.Mod.Api.csproj" Type="Classic C#" />
-    <Project Path="src\ColonySync.Mod.Bootloader\ColonySync.Mod.Bootloader.csproj" Type="Classic C#" />
-    <Project Path="src\ColonySync.Mod.Core\ColonySync.Mod.Core.csproj" Type="Classic C#" />
-    <Project Path="src\ColonySync.Mod.Shared\ColonySync.Mod.Shared.csproj" Type="Classic C#" />
-  </Folder>
   <Folder Name="/Plugins/">
     <Project Path="src\ColonySync.Plugins.Aliens\ColonySync.Plugins.Aliens.csproj" Type="Classic C#" />
     <Project Path="src\ColonySync.Plugins.Anomaly\ColonySync.Plugins.Anomaly.csproj" Type="Classic C#" />
@@ -24,8 +14,10 @@
     <File Path="Directory.Build.targets" />
     <File Path="Directory.Packages.props" />
   </Folder>
+  <Project Path="src\ColonySync.Bootloader\ColonySync.Bootloader.csproj" Type="Classic C#" />
   <Project Path="src\ColonySync.Common\ColonySync.Common.csproj" Type="Classic C#" />
   <Project Path="src\ColonySync.Communication\ColonySync.Communication.csproj" Type="Classic C#" />
+  <Project Path="src\ColonySync.Mod.Tests\ColonySync.Mod.Tests.csproj" Type="Classic C#" />
   <Project Path="src\ColonySync.Mod\ColonySync.Mod.csproj" Type="Classic C#" />
   <Project Path="src\ColonySync.Repositories\ColonySync.Repositories.csproj" Type="Classic C#" />
   <Project Path="src\ColonySync.WebApp\ColonySync.WebApp.csproj" Type="Classic C#" />

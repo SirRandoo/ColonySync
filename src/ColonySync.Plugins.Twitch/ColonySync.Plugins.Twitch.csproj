@@ -11,14 +11,16 @@
     
     <!-- Project References -->
     <ItemGroup>
-        <ProjectReference Include="..\ColonySync.Mod.Api\ColonySync.Mod.Api.csproj"/>
+        <ProjectReference Include="..\ColonySync.Common\ColonySync.Common.csproj"/>
     </ItemGroup>
     
     <!-- Package References -->
     <ItemGroup>
+        <PackageReference Include="PolySharp" />
         <PackageReference Include="System.Net.Http"/>
         <PackageReference Include="WebSocketSharp" />
         <PackageReference Include="System.Text.Json"/>
+        <PackageReference Include="Microsoft.Extensions.Logging"/>
         <PackageReference Include="deniszykov.WebSocketListener"/>
     </ItemGroup>
 </Project>
