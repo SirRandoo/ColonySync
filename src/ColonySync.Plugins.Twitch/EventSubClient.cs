@@ -2,10 +2,8 @@ using System;
 using System.Net.WebSockets;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 
 namespace ColonySync.Plugins.Twitch;
@@ -62,7 +60,7 @@ public class TwitchEventSubClient(ILogger logger)
                     break;
                 }
 
-                var jsonString = Encoding.UTF8.GetString(buffer, index: 0, result.Count);
+                string jsonString = Encoding.UTF8.GetString(buffer, index: 0, result.Count);
                 HandleMessage(jsonString);
             }
         }
@@ -88,7 +86,7 @@ public class TwitchEventSubClient(ILogger logger)
     private async Task AttemptReconnectWithBackoff()
     {
         _reconnectAttempts++;
-        var delay = Math.Min(val1: 30000, 1000 * (int)Math.Pow(x: 2, _reconnectAttempts)); // max 30s
+        int delay = Math.Min(val1: 30000, 1000 * (int)Math.Pow(x: 2, _reconnectAttempts)); // max 30s
 
         logger.LogInformation(message: "Attempting reconnect in {0} seconds...", (delay / 1000).ToString("N"));
         await Task.Delay(delay);
@@ -103,12 +101,12 @@ public class TwitchEventSubClient(ILogger logger)
 
         if (!root.TryGetProperty(propertyName: "metadata", out var metadata)) return;
 
-        var messageType = metadata.GetProperty("message_type").GetString();
+        string? messageType = metadata.GetProperty("message_type").GetString();
 
         switch (messageType)
         {
             case "session_welcome":
-                var sessionId = root.GetProperty("payload").GetProperty("session").GetProperty("id").GetString();
+                string? sessionId = root.GetProperty("payload").GetProperty("session").GetProperty("id").GetString();
                 logger.LogInformation(message: "Session established. ID: {0}", sessionId);
                 break;
 
@@ -117,7 +115,7 @@ public class TwitchEventSubClient(ILogger logger)
                 break;
 
             case "session_reconnect":
-                var reconnectUrl = root.GetProperty("payload").GetProperty("session").GetProperty("reconnect_url").GetString();
+                string? reconnectUrl = root.GetProperty("payload").GetProperty("session").GetProperty("reconnect_url").GetString();
                 logger.LogWarning(message: "Reconnect requested. New URL: {0}", reconnectUrl);
 
                 lock (_lock)
@@ -141,7 +139,7 @@ public class TwitchEventSubClient(ILogger logger)
 
     private void HandleNotification(JsonElement root)
     {
-        var subscriptionType = root.GetProperty("payload").GetProperty("subscription").GetProperty("type").GetString();
+        string? subscriptionType = root.GetProperty("payload").GetProperty("subscription").GetProperty("type").GetString();
         var eventData = root.GetProperty("payload").GetProperty("event");
 
         logger.LogDebug(message: "Notification: {0}", subscriptionType);
@@ -149,7 +147,7 @@ public class TwitchEventSubClient(ILogger logger)
         switch (subscriptionType)
         {
             case "stream.online":
-                var broadcasterId = eventData.GetProperty("broadcaster_user_id").GetString();
+                string? broadcasterId = eventData.GetProperty("broadcaster_user_id").GetString();
                 logger.LogInformation(message: "Stream is online for {0}", broadcasterId);
                 break;
 
