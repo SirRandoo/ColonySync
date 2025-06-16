@@ -20,9 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using ColonySync.Mod.Domain.Settings;
 using ColonySync.Mod.Presentation.Drawers;
 using ColonySync.Mod.Presentation.Extensions;
-using ColonySync.Mod.Settings;
 using UnityEngine;
 using Verse;
 

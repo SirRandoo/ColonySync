@@ -21,9 +21,9 @@
 // SOFTWARE.
 
 using ColonySync.Common.Entities;
+using ColonySync.Mod.Domain.Settings;
 using ColonySync.Mod.Presentation.Drawers;
 using ColonySync.Mod.Presentation.Extensions;
-using ColonySync.Mod.Settings;
 using UnityEngine;
 using Verse;
 
