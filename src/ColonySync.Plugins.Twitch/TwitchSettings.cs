@@ -37,14 +37,8 @@ public sealed class TwitchSettings : IVersionedSettings, IConnectionSettings
 {
     private const int LatestVersion = 1;
 
-    /// <summary>
-    ///     The Twitch channel that the mod's internal bot interacts with.
-    /// </summary>
-    /// <remarks>
-    ///     This property specifies the target channel for the bot's activities on the Twitch platform.
-    ///     In order to enable auto-connect functionality, both this property and the <see cref="Token" /> must be provided.
-    /// </remarks>
-    public string? Channel { get; init; }
+    /// <inheritdoc />
+    public string? ChatChannelId { get; init; }
 
     /// <inheritdoc />
     public bool SendConnectionMessage { get; init; }

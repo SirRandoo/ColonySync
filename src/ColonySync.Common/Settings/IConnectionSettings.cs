@@ -66,9 +66,16 @@ public interface IConnectionSettings
     string? OAuthToken { get; init; }
 
     /// <summary>
-    ///     Specifies an optional client ID to override the default value used for connection settings.
-    ///     This property allows custom configuration of the client ID, which may be required in scenarios
-    ///     where a specific client identification is needed for authentication or connection purposes.
+    ///     An optional client id users can supply.
     /// </summary>
+    /// <remarks>
+    ///     The primary purpose of this property is to provide an immediate way for 3rd parties to get the chat portion working
+    ///     in the event it's decommissioned.
+    /// </remarks>
     string? ClientIdOverride { get; init; }
+
+    /// <summary>
+    ///     The id of the chat channel to connect to when the connection's established.
+    /// </summary>
+    string? ChatChannelId { get; init; }
 }
